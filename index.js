@@ -71,8 +71,11 @@ app.get('/', function(req, res) {
 });
 
 app.get('/profile', isLoggedIn, function(req, res) {
-  res.render('profile');
+  db.user.findOne().then(function(user) {
+    res.render('profile', { user });
+  });
 });
+
 
 app.use('/auth', require('./controllers/auth'));
 

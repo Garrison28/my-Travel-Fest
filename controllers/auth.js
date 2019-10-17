@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const express = require('express');
 const router = express.Router();
-const passport = require('../config/ppConfig')
+const passport = require('../config/ppConfig');
 const db = require('../models');
 
 
@@ -56,5 +56,7 @@ router.get('/logout', function(req, res) {
   req.flash('success', 'You have logged out!');
   res.redirect('/');
 });
+
+
 
 module.exports = router;
