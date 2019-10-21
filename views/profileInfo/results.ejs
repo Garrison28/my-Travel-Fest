@@ -1,5 +1,6 @@
-<h1>
-    <ul>
-        
-    </ul>
-</h1>
+<% artists.forEach(artist => { %>
+    <li>
+        <%= artist.displayName %>
+        <%= artist.onTourUntil %>
+    </li>
+<% }); %>

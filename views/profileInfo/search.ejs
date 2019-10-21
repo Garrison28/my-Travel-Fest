@@ -5,16 +5,10 @@
 <hr>
 
 <div>
-    <form method="GET" action="/profileInfo/search">
+    <form method="GET" action="/profileInfo/results">
         <label for="query">Search by Artist</label>
         <input type="text" name="artist_name" placeholder="Seach for Artist">
         <input type="submit" value="Go!">
     </form>
 </div>
 
-<% artists.forEach(artist => { %>
-    <li>
-        <%= artist.displayName %>
-        <%= artist.onTourUntil %>
-    </li>
-<% }); %>
