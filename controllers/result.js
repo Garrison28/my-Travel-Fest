@@ -6,19 +6,20 @@ const db = require('../models');
 const BASE_ARTIST_URL = 'https://api.songkick.com/api/3.0/search/artists.json?apikey={your_api_key}&query={artist_name}';
 const BASE_ARTIST_EVENT_URL = 'https://api.songkick.com/api/3.0/artists/{artist_name}/calendar.json?apikey={your_api_key}'
 
-// create GET route to display search bar
-router.get('results', function (req, res) {
-  console.log('hello');
-  res.send('results');
+router.get('/', function (req, res) {
+  console.log(req.query.name);
+  axios.get(BASE_ARTIST_URL, {
+    params: {
+      query: req.params.artist_name,
+      apikey: process.env.API_KEY
+    }
+    // displaying search results on my results ejs page
+  }).then(function (apiResponse) {
+    var artists = apiResponse.data.results;
+    console.log(`😆`)
+    console.log(artists);
+    res.send('profile/showResults', { artists });
+  });
 });
-// });
-
-// create GET route to display search results
-// calling songkick api to get artist search results
-// });
-
-// create POST route to save artists to faves db/page
-
-// create DELETE route to delete artisst from faves
 
 module.exports = router;
