@@ -6,9 +6,13 @@ const passport = require('./config/ppConfig');
 const flash = require('connect-flash');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const helmet = require('helmet');
+const axios = require('axios');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./models');
 const RateLimit = require('express-rate-limit');
+const BASE_ARTIST_URL = 'https://api.songkick.com/api/3.0/search/artists.json?apikey={your_api_key}&query={artist_name}';
+const BASE_ARTIST_EVENT_URL = 'https://api.songkick.com/api/3.0/artists/{artist_name}/calendar.json?apikey={your_api_key}'
+
 
 const app = express();
 
@@ -76,9 +80,24 @@ app.get('/profile', isLoggedIn, function(req, res) {
   });
 });
 
+app.get('/results', function(req, res) {
+  console.log(req.query.artist_name);
+  axios.get(BASE_ARTIST_URL, {
+    params: {
+      query: req.params.artist_name,
+      apikey: process.env.API_KEY
+    }
+    // displaying search results on my results ejs page
+  }).then(function (response) {
+    var artists = response.data.artist_name;
+    console.log(artists);
+    res.render('results', { artists });
+  });
+});
+
 app.use('/auth', require('./controllers/auth'));
 app.use('/search', require('./controllers/search'));
-app.use('/results', require('./controllers/result'));
+app.use('/result', require('./controllers/result'));
 
 var server = app.listen(process.env.PORT || 3000);
 

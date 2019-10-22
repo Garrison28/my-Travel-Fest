@@ -7,9 +7,9 @@ const BASE_ARTIST_URL = 'https://api.songkick.com/api/3.0/search/artists.json?ap
 const BASE_ARTIST_EVENT_URL = 'https://api.songkick.com/api/3.0/artists/{artist_name}/calendar.json?apikey={your_api_key}'
 
 // create GET route to display search bar
-router.get('results', function (req, res) {
-  console.log('hello');
-  res.send('results');
+router.get('/results', function (req, res) {
+  console.log(req.query.name);
+  res.send('Hello');
 });
 // });
 
