@@ -1,0 +1,14 @@
+<h1>Your Selected Artist</h1>
+
+<hr>
+
+<a href="/profile">Back to Profile</a>
+
+<hr>
+
+<p>Artist Name: <%= artist[0].displayName %></p>
+<p> On Tour Until: <%= artist[0].onTourUntil %></p>
+
+<form action="/faves" method="POST">
+    <input type="submit" value="save!">
+</form>

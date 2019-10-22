@@ -11,7 +11,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./models');
 const RateLimit = require('express-rate-limit');
 const BASE_ARTIST_URL = 'https://api.songkick.com/api/3.0/search/artists.json?apikey={your_api_key}&query={artist_name}';
-const BASE_ARTIST_EVENT_URL = 'https://api.songkick.com/api/3.0/artists/{artist_name}/calendar.json?apikey={your_api_key}'
+const BASE_ARTIST_EVENT_URL = 'https://api.songkick.com/api/3.0/artists/{artist_name}/calendar.json?apikey={your_api_key}';
 
 
 const app = express();
@@ -80,19 +80,25 @@ app.get('/profile', isLoggedIn, function(req, res) {
   });
 });
 
-app.get('/results', function(req, res) {
-  console.log(req.query.artist_name);
+app.get('/artists', function(req, res) {
   axios.get(BASE_ARTIST_URL, {
     params: {
-      query: req.params.artist_name,
+      query: req.query.artist_name,
       apikey: process.env.API_KEY
     }
     // displaying search results on my results ejs page
-  }).then(function (response) {
-    var artists = response.data.artist_name;
-    console.log(artists);
-    res.render('results', { artists });
+  }).then(function (result) {
+    var artist = result.data.resultsPage.results.artist;
+    // console.log(artist.data.resultsPage.results);
+    console.log(artist[0].identifier[1]);
+    res.render('artists', { artist });
   });
+});
+
+app.post('/faves', function(req, res) {
+  db.artists.findOrCreate(req.body.artist[0]);
+}).then(function(saved) {
+  res.redirect('faves', { saved });
 });
 
 app.use('/auth', require('./controllers/auth'));
