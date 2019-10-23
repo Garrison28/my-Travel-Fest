@@ -11,14 +11,11 @@ module.exports = {
       songKickArtistId: {
         type: Sequelize.INTEGER
       },
-      displaName: {
-        type: Sequelize.STRING
-      },
-      uri: {
+      displayName: {
         type: Sequelize.STRING
       },
       onTourUntil: {
-        type: Sequelize.DATE
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

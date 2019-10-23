@@ -7,6 +7,7 @@ const flash = require('connect-flash');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const helmet = require('helmet');
 const axios = require('axios');
+const methodOverride = require('method-override');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./models');
 const RateLimit = require('express-rate-limit');
@@ -70,6 +71,8 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(methodOverride('_method'));
+
 app.get('/', function(req, res) {
   res.render('index');
 });
@@ -88,17 +91,42 @@ app.get('/artists', function(req, res) {
     }
     // displaying search results on my results ejs page
   }).then(function (result) {
-    var artist = result.data.resultsPage.results.artist;
+    let artists = result.data.resultsPage.results.artist;
     // console.log(artist.data.resultsPage.results);
-    console.log(artist[0].identifier[1]);
-    res.render('artists', { artist });
+    console.log(artists);
+    res.render('artists', { artists });
   });
 });
 
-app.post('/faves', function(req, res) {
-  db.artists.findOrCreate(req.body.artist[0]);
-}).then(function(saved) {
-  res.redirect('faves', { saved });
+
+app.post('/artists', function(req, res) {
+  console.log(db.artists);
+  db.artist.findOrCreate({
+    where: {
+      songKickArtistId: req.body.id,
+      displayName: req.body.displayName
+      // onTourUntil: req.body.onTourUntil
+    }
+  }).then(function(artists) {
+    res.render('faves', { artists });
+  });
+});
+
+app.delete('/faves/:id', function(req, res) {
+  console.log('!!!!!!!!!!!!!!!!!!');
+  db.artist.destroy({
+    where: {
+      id: req.body.id
+    }
+  }).then(function() {
+    res.redirect('/faves');
+  });
+});
+
+app.get('/faves', function(req, res) {
+  db.artist.findAll().then(function(artists) {
+    res.render('faves', { artists });
+  });
 });
 
 app.use('/auth', require('./controllers/auth'));

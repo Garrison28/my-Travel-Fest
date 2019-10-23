@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: {
           args: [1, 99],
-          mag: 'Name must be between 1 and 99 characters'
+          msg: 'Name must be between 1 and 99 characters'
         }
       }
     },
@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   user.associate = function (models) {
     // associations can be defined here
-    models.user.hasMany(models.artist);
+    models.user.belongsToMany(models.artist, { through: 'usersArtists' });
   };
   // compares entered password to hashed password
   user.prototype.validPassword = function(passwordTyped) {

@@ -11,7 +11,7 @@
   <body>
     <div class="container">
       <h1>My Roadtrip</h1>
-      <%- JSON.stringify(currentUser) %>
+      <h2>Hello, <%- JSON.stringify(currentUser.name) %></h2>
       <% include partials/alerts %>
       <%- body %>
     </div>

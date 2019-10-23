@@ -2,13 +2,12 @@
 module.exports = (sequelize, DataTypes) => {
   const artist = sequelize.define('artist', {
     songKickArtistId: DataTypes.INTEGER,
-    displaName: DataTypes.STRING,
-    uri: DataTypes.STRING,
-    onTourUntil: DataTypes.DATE
+    displayName: DataTypes.STRING,
+    onTourUntil: DataTypes.STRING
   }, {});
   artist.associate = function(models) {
     // associations can be defined here
-    models.artist.belongsTo(models.user);
+    models.artist.belongsToMany(models.user, { through: 'usersArtists'});
   };
   return artist;
 };
