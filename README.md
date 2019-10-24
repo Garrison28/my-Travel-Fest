@@ -3,7 +3,12 @@
 ## Technologies Used: 
 
 SQL, Sequelize, Node.js, Express
+
+## Planning
+
 For this project, I wanted to make an app that let you search for an artist, choose said artist and then display that artist information in cluding and end tour date, name and the amount of interest you had in the artist. I started off by planning out routes and what there relations would with the data base they were associated with. Then I went ahead and planned out what ionformation the data bases would contain. Finally i made my user stories.
+![Planning](/READMEassets/favesroutes.jpg)
+
 ## User Story
 
 As a user, I want to be able to search for any artist and have the artist information displayed.
