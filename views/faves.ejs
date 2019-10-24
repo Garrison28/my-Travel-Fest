@@ -6,14 +6,22 @@
 
 
 <% artists.forEach(artist => { %>
-    <ul>
-        <li><%= artist.displayName %></li> 
-        <form action="/faves/<%= artist.id %>?_method=DELETE" method="POST">
-        <input name="id" value="<%= artist.id %>" type="hidden">
-        <input name="displayName" value="<%= artist.displayName %>" type="hidden">
-        <input name="onTourUntil" value="<%= artist.onTourUntil %>" type="hidden">
-        <input type="submit" value="Delete">
+<ul>
+  <li>Artist: <%= artist.displayName %></li>
+  <hr>
+  <form action="/faves/<%= artist.id %>?_method=DELETE" method="POST">
+    <input name="id" value="<%= artist.id %>" type="hidden">
+    <input name="displayName" value="<%= artist.displayName %>" type="hidden">
+    <input name="onTourUntil" value="<%= artist.onTourUntil %>" type="hidden">
+    <input type="submit" value="Delete">
+  </form>
+  </br>
+  <p>Interest Level: <%= artist.interestLevel %>
+    <form action="faves/<%= artist.id %>?_method=PUT" method="POST">
+      <input type="text" name="interestLevel" value="<%= artist.interestLevel %>">
+      <input type="submit" value="update interest level"> 
     </form>
-    </ul>
+  </p>
+</ul>
 
 <% }) %>

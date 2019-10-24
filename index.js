@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 require('dotenv').config();
 const express = require('express');
 const ejsLayouts = require('express-ejs-layouts');
@@ -100,7 +101,6 @@ app.get('/artists', function(req, res) {
 
 
 app.post('/artists', function(req, res) {
-  console.log(db.artists);
   db.artist.findOrCreate({
     where: {
       songKickArtistId: req.body.id,
@@ -108,12 +108,11 @@ app.post('/artists', function(req, res) {
       // onTourUntil: req.body.onTourUntil
     }
   }).then(function(artists) {
-    res.render('faves', { artists });
+    res.redirect('/faves');
   });
 });
 
 app.delete('/faves/:id', function(req, res) {
-  console.log('!!!!!!!!!!!!!!!!!!');
   db.artist.destroy({
     where: {
       id: req.body.id
@@ -129,6 +128,18 @@ app.get('/faves', function(req, res) {
   });
 });
 
+app.put('/faves/:id', function(req, res) {
+  db.artist.update({
+    interestLevel: parseInt(req.body.interestLevel)
+  }, {
+    where: {
+      id: req.params.id
+    }
+  }).then(function(artist) {
+    res.redirect('/faves');
+  });
+});
+    
 app.use('/auth', require('./controllers/auth'));
 app.use('/search', require('./controllers/search'));
 app.use('/result', require('./controllers/result'));

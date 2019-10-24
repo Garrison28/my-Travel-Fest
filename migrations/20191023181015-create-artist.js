@@ -17,6 +17,10 @@ module.exports = {
       onTourUntil: {
         type: Sequelize.INTEGER
       },
+      interestLevel: {
+        type: Sequelize.INTEGER,
+        defaultValue: 5
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
