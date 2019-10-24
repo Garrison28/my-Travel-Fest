@@ -7,8 +7,9 @@
 <hr class="line-break">
 
 <% artists.forEach(function(artist) { %>
+<div class="card">
 <p class="artistOne">Artist: <%= artist.displayName %></p>
-<p><%= artist.id %></p>
+<p>SongKick Id: <%= artist.id %></p>
 <p>On Tour Until: <%= artist.onTourUntil %></p>
 <form action="/artists" method="POST">
     <input name="id" value="<%= artist.id %>" type="hidden">
@@ -16,6 +17,7 @@
     <input name="onTourUntil" value="<%= artist.onTourUntil %>" type="hidden">
     <input type="submit" value="save!">
 </form>
+</div>
 <br>
 <br>
 <% }) %>

@@ -6,6 +6,7 @@
 
 
 <% artists.forEach(artist => { %> 
+<div class="card">
   <p class="artistOne">Artist: <%= artist.displayName %></p>
   
   <form action="/faves/<%= artist.id %>?_method=DELETE" method="POST">
@@ -18,9 +19,11 @@
   <p>Interest Level: <%= artist.interestLevel %>
     <form action="faves/<%= artist.id %>?_method=PUT" method="POST">
       <input type="text" name="interestLevel" placeholder="Your interest level">
+      <br>
       <input type="submit" value="update interest level"> 
     </form>
   </p>
+</div>
   <hr class="line-break">
 
 <% }) %>
