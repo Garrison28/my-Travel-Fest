@@ -1,20 +1,25 @@
 <h1>Your Selected Artist</h1>
 
-<hr>
-
-<a href="/profile">Back to Profile</a> | <a href="/faves">My Artists</a>
-
-<hr>
+<hr class="line-break">
+<div class="nav-bar">
+    <a href="/profile">Back to Profile</a> | <a href="/faves">My Artists</a>
+</div>
+<hr class="line-break">
 
 <% artists.forEach(function(artist) { %>
-    <p>Artist: <%= artist.displayName %></p>
-    <p><%= artist.id %></p>
-    <p>On Tour Until: <%= artist.onTourUntil %></p>
-    <form action="/artists" method="POST">
-        <input name="id" value="<%= artist.id %>" type="hidden">
-        <input name="displayName" value="<%= artist.displayName %>" type="hidden">
-        <input name="onTourUntil" value="<%= artist.onTourUntil %>" type="hidden">
-        <input type="submit" value="save!">
-    </form>
+<p class="artistOne">Artist: <%= artist.displayName %></p>
+<p><%= artist.id %></p>
+<p>On Tour Until: <%= artist.onTourUntil %></p>
+<form action="/artists" method="POST">
+    <input name="id" value="<%= artist.id %>" type="hidden">
+    <input name="displayName" value="<%= artist.displayName %>" type="hidden">
+    <input name="onTourUntil" value="<%= artist.onTourUntil %>" type="hidden">
+    <input type="submit" value="save!">
+</form>
+<br>
+<br>
 <% }) %>
-
+</br>
+</br>
+</br>
+<footer>Provided by SongKick API</footer>

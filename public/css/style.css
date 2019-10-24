@@ -1,0 +1,18 @@
+body {
+    text-align: center;
+    background-image: url("../img/nainoa-shizuru-NcdG9mK3PBY-unsplash.jpg");
+    background-size: contain;
+    background-attachment: fixed;
+    color: rgb(0, 102, 255);
+}
+
+.nav-bar{
+    width: 50%;
+    margin: auto;
+    font-size: 16px;
+    background-color: whitesmoke;
+}
+
+.line-break{
+    width: 50%;
+}
